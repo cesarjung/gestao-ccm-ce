@@ -1,111 +1,299 @@
-:root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+@import '@fontsource/geist-sans/400.css';
+@import '@fontsource/geist-sans/500.css';
+@import '@fontsource/geist-sans/600.css';
+@import '@fontsource/geist-sans/700.css';
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+    /* Sirtec Corporate Theme - Light Mode */
+    --background: 0 0% 98%;
+    --foreground: 0 0% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 15%;
+
+    --primary: 25 95% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 30 20% 92%;
+    --secondary-foreground: 0 0% 15%;
+
+    --muted: 30 20% 92%;
+    --muted-foreground: 0 0% 45%;
+
+    --accent: 0 78% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 142 71% 35%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 15%;
+
+    --border: 30 15% 85%;
+    --input: 30 15% 85%;
+    --ring: 25 95% 50%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 12%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 25 95% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 20%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 25 95% 55%;
+
+    /* Sirtec gradients and shadows */
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(30 20% 97%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(38 95% 50%) 0%, hsl(25 95% 50%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(25 95% 50%) 0%, hsl(0 78% 50%) 100%);
+    --gradient-success: linear-gradient(135deg, hsl(142 71% 35%) 0%, hsl(142 71% 42%) 100%);
+    --gradient-warning: linear-gradient(135deg, hsl(38 92% 50%) 0%, hsl(25 95% 53%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(30 20% 97%) 0%, hsl(0 0% 98%) 100%);
+    --gradient-glass: linear-gradient(135deg, hsl(25 95% 50% / 0.05) 0%, hsl(0 78% 50% / 0.02) 100%);
+
+    --shadow-card: 0 1px 3px hsl(0 0% 15% / 0.08), 0 1px 2px hsl(0 0% 15% / 0.06);
+    --shadow-glow: 0 0 20px hsl(25 95% 50% / 0.15);
+    --shadow-elevated: 0 4px 12px hsl(0 0% 15% / 0.1), 0 2px 4px hsl(0 0% 15% / 0.06);
   }
 
-  #social .button-icon {
-    filter: invert(1) brightness(2);
+  .dark {
+    --background: 0 0% 8%;
+    --foreground: 0 0% 95%;
+
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 25 95% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 18%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 55%;
+
+    --accent: 0 78% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 95%;
+
+    --success: 142 71% 40%;
+    --success-foreground: 0 0% 95%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 8%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 25 95% 55%;
+
+    --sidebar-background: 0 0% 7%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 25 95% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 15%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 0 0% 15%;
+    --sidebar-ring: 25 95% 55%;
+
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 12%) 0%, hsl(0 0% 10%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(38 95% 50%) 0%, hsl(25 95% 55%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(25 95% 55%) 0%, hsl(0 78% 55%) 100%);
+    --gradient-success: linear-gradient(135deg, hsl(142 71% 40%) 0%, hsl(142 71% 48%) 100%);
+    --gradient-warning: linear-gradient(135deg, hsl(38 92% 50%) 0%, hsl(25 95% 53%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 11%) 0%, hsl(0 0% 9%) 100%);
+    --gradient-glass: linear-gradient(135deg, hsl(25 95% 55% / 0.1) 0%, hsl(0 78% 55% / 0.05) 100%);
+
+    --shadow-card: 0 4px 24px -4px hsl(0 0% 4% / 0.5);
+    --shadow-glow: 0 0 40px hsl(25 95% 55% / 0.2);
+    --shadow-elevated: 0 8px 32px -8px hsl(0 0% 4% / 0.6), 0 4px 16px -4px hsl(25 95% 55% / 0.1);
   }
 }
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-}
+@layer base {
+  * {
+    @apply border-border;
+  }
 
-body {
-  margin: 0;
-}
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Geist Sans', system-ui, sans-serif;
+  }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
+  /* 
+   * Radix UI global pointer-events lock breaker.
+   * Radix injects <style> tags into the head that lock the body.
+   */
+  html body,
+  body[data-scroll-locked],
+  body[style] {
+    pointer-events: auto !important;
+  }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
+  [data-radix-focus-guard] {
+    display: none !important;
+  }
+
+  /* Custom softer scrollbars globally */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--muted-foreground);
+  }
+
+  /* Highly visible custom scrollbars for filter areas */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: hsl(var(--secondary) / 0.5);
+    border-radius: 10px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.4);
+    border-radius: 10px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.8);
+  }
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted-foreground) / 0.4) transparent;
+  }
+
+  .no-scrollbar-custom::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar-custom {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Leaflet Map Tooltips Fix for Dark Mode */
+  .custom-tooltip {
+    background-color: hsl(var(--card)) !important;
+    color: hsl(var(--card-foreground)) !important;
+    border: 1px solid hsl(var(--border)) !important;
+    box-shadow: var(--shadow-elevated) !important;
+  }
+  .custom-tooltip.leaflet-tooltip-top:before {
+    border-top-color: hsl(var(--border)) !important;
+  }
+  .custom-tooltip.leaflet-tooltip-bottom:before {
+    border-bottom-color: hsl(var(--border)) !important;
+  }
+  .custom-tooltip.leaflet-tooltip-left:before {
+    border-left-color: hsl(var(--border)) !important;
+  }
+  .custom-tooltip.leaflet-tooltip-right:before {
+    border-right-color: hsl(var(--border)) !important;
   }
 }
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
+
+@layer utilities {
+  .gradient-card {
+    background: var(--gradient-card);
+  }
+
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .gradient-success {
+    background: var(--gradient-success);
+  }
+
+  .gradient-warning {
+    background: var(--gradient-warning);
+  }
+
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .gradient-glass {
+    background: var(--gradient-glass);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .glass-effect {
+    @apply backdrop-blur-xl bg-card/60 border border-border/50;
+  }
+
+  .stat-card-hover {
+    @apply transition-all duration-300 hover:scale-[1.02] hover:shadow-elevated;
   }
 }
-p {
-  margin: 0;
-}
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
+@layer components {
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
