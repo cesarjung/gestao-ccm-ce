@@ -280,12 +280,13 @@ export const useCarteiraDashboardData = (selectedUnidadesIds: string[]) => {
           unidadeNome,
           obrasInaptasVal: row[1] ? String(row[1]).trim() : '', // B = 1 (APTA?)
           obrasSemOrcamentoVal: row[3] ? String(row[3]).trim() : '', // D = 3 (ORÇ.)
-          statusExecucao: row[7] ? String(row[7]).trim() : '', // H = 7 (STATUS EXECUÇÃO)
+          statusExecucao: (row[7] || row[42] || '').toString().trim(), // H=7 ou AQ=42 (STATUS ESTEIRA)
           projeto: obraId, 
           titulo: row[11] ? String(row[11]).trim() : '', // L = 11 (CLIENTE)
           municipio: row[8] ? String(row[8]).trim() : '', // I = 8 (MUNICIPIO)
           prioridade: '', // N/A
-          postesDisponiveis: parseNumber(row[21]), // V = 21 (PT DISP.)
+          // Se PT DISP (21) estiver vazio, usa TOTAL PT (16)
+          postesDisponiveis: row[21] && String(row[21]).trim() !== '' ? parseNumber(row[21]) : parseNumber(row[16]), 
           capacidadeFaturamento: parseNumber(row[39]), // AN = 39 (VALOR CONSIDERADO)
           dataInicio: parseDate(row[5]), // F = 5 (Inicio)
           dataFim: parseDate(row[6]), // G = 6 (Fim)
@@ -299,8 +300,9 @@ export const useCarteiraDashboardData = (selectedUnidadesIds: string[]) => {
 
           qtdGpm: parseNumber(row[18]), // S = 18 (Qtd. Postes Realizado (GPM))
           qtdNeoex: parseNumber(row[20]), // U = 20 (Qtd. Postes Planejados)
-          orcamentoValidado: parseNumber(row[36]), // AK = 36 (MO VALIDADO)
-          orcamentoRaw: String(row[36] !== undefined && row[36] !== null && row[36] !== '' ? row[36] : 'VAZIO'),
+          // Se MO VALIDADO (36) estiver vazio, usa VR_MAO_DE_OBRA (35)
+          orcamentoValidado: row[36] && String(row[36]).trim() !== '' ? parseNumber(row[36]) : parseNumber(row[35]),
+          orcamentoRaw: String(row[36] !== undefined && row[36] !== null && row[36] !== '' ? row[36] : (row[35] || 'VAZIO')),
           recursosAplicados: recursosAplicadosPorObra[obraId] || 0,
         });
       }
