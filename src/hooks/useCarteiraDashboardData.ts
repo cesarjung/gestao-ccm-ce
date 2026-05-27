@@ -249,14 +249,26 @@ export const useCarteiraDashboardData = (selectedUnidadesIds: string[]) => {
         const avnpMap: Record<string, number> = {};
         const avnpMaisRecente = 0;
 
-        let rawLat = Number(String(row[50] || '').replace(',', '.')); // AY = 50 (Latitude/UTM Y)
-        let rawLng = Number(String(row[51] || '').replace(',', '.')); // AZ = 51 (Longitude/UTM X)
+        const parseCoord = (val: any) => {
+            if (!val) return 0;
+            let str = String(val).trim();
+            if (str.includes(',') && str.includes('.')) {
+                str = str.replace(/\./g, '').replace(',', '.');
+            } else if (str.includes(',')) {
+                str = str.replace(',', '.');
+            }
+            const num = Number(str);
+            return isNaN(num) ? 0 : num;
+        };
+
+        let rawLat = parseCoord(row[50]); // AY = 50 (Latitude/UTM Y)
+        let rawLng = parseCoord(row[51]); // AZ = 51 (Longitude/UTM X)
 
         let finalLat = 0;
         let finalLng = 0;
 
         // Na planilha, a coluna 50 (Latitude) tem o Y (958...) e 51 (Longitude) tem o X (554...)
-        if (!isNaN(rawLat) && !isNaN(rawLng) && rawLat !== 0 && rawLng !== 0) {
+        if (rawLat !== 0 && rawLng !== 0) {
            // Se forem coordenadas grandes (UTM), o Leste (X) costuma ter 6 dígitos (554377) e o Norte (Y) 7 (9588391)
            if (rawLng > 1000000) {
               const coords = utmToLatLng(rawLat, rawLng); // inverte
