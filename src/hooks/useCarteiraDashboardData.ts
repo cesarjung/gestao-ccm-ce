@@ -249,13 +249,13 @@ export const useCarteiraDashboardData = (selectedUnidadesIds: string[]) => {
         const avnpMap: Record<string, number> = {};
         const avnpMaisRecente = 0;
 
-        let rawLat = Number(String(row[47] || '').replace(',', '.')); // AV = 47 (Latitude/UTM Y)
-        let rawLng = Number(String(row[48] || '').replace(',', '.')); // AW = 48 (Longitude/UTM X)
+        let rawLat = Number(String(row[50] || '').replace(',', '.')); // AY = 50 (Latitude/UTM Y)
+        let rawLng = Number(String(row[51] || '').replace(',', '.')); // AZ = 51 (Longitude/UTM X)
 
         let finalLat = 0;
         let finalLng = 0;
 
-        // Na planilha, a coluna 47 (Latitude) tem o Y (958...) e 48 (Longitude) tem o X (554...)
+        // Na planilha, a coluna 50 (Latitude) tem o Y (958...) e 51 (Longitude) tem o X (554...)
         if (!isNaN(rawLat) && !isNaN(rawLng) && rawLat !== 0 && rawLng !== 0) {
            // Se forem coordenadas grandes (UTM), o Leste (X) costuma ter 6 dígitos (554377) e o Norte (Y) 7 (9588391)
            if (rawLng > 1000000) {
@@ -286,10 +286,10 @@ export const useCarteiraDashboardData = (selectedUnidadesIds: string[]) => {
           municipio: row[8] ? String(row[8]).trim() : '', // I = 8 (MUNICIPIO)
           prioridade: '', // N/A
           postesDisponiveis: parseNumber(row[21]), // V = 21 (PT DISP.)
-          capacidadeFaturamento: parseNumber(row[36]), // AK = 36 (VALOR CONSIDERADO)
+          capacidadeFaturamento: parseNumber(row[39]), // AN = 39 (VALOR CONSIDERADO)
           dataInicio: parseDate(row[5]), // F = 5 (Inicio)
           dataFim: parseDate(row[6]), // G = 6 (Fim)
-          dataVistoria: parseDate(row[42]), // AQ = 42 (Data Vistoria)
+          dataVistoria: parseDate(row[45]), // AT = 45 (Data Vistoria)
           dataEnergizacao: null, // N/A
           meses,
           avnpMap,
@@ -299,8 +299,8 @@ export const useCarteiraDashboardData = (selectedUnidadesIds: string[]) => {
 
           qtdGpm: parseNumber(row[18]), // S = 18 (Qtd. Postes Realizado (GPM))
           qtdNeoex: parseNumber(row[20]), // U = 20 (Qtd. Postes Planejados)
-          orcamentoValidado: parseNumber(row[33]), // AH = 33 (MO VALIDADO)
-          orcamentoRaw: String(row[33] !== undefined && row[33] !== null && row[33] !== '' ? row[33] : 'VAZIO'),
+          orcamentoValidado: parseNumber(row[36]), // AK = 36 (MO VALIDADO)
+          orcamentoRaw: String(row[36] !== undefined && row[36] !== null && row[36] !== '' ? row[36] : 'VAZIO'),
           recursosAplicados: recursosAplicadosPorObra[obraId] || 0,
         });
       }

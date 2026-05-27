@@ -168,7 +168,7 @@ def fetch_google_sheets(unidade_id, gc, retries=3):
             
             # Limite maximo de colunas a extrair de cada aba (para evitar lixo infinito)
             MAX_COLS = {
-                "Carteira_Planejador": 60,
+                "Carteira_Planejador": 70,
                 "Plan_Principal": 70,
                 "Reprogramadas": 55,
                 "Base_Curva": 10,
